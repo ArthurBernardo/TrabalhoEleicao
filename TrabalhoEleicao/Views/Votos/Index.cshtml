@@ -1,0 +1,237 @@
+﻿@model IEnumerable<TrabalhoEleicao.ViewModels.ImportArciveViewModel>
+
+<body style="background-color: rgb(112 148 153)">
+    <h1 style="text-align: center; color: #333333; font-family: Rockwell"><strong>Tela Inicial de Votos</strong></h1>
+    <fieldset>
+        <div class="row" style="margin-top: 1%">
+            <div class="col-sm-12 col-md-12">
+                <div class="tab-container">
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#div-import" aria-controls="div-import" role="tab" data-toggle="tab" style="color: black;">Importar</a></li>
+                        <li role="presentation" style="margin-left: 10%;"><a href="#div-instructions" aria-controls="div-instructions" role="tab" data-toggle="tab" style="color: black;">Intruções</a></li>
+                        <li role="presentation" style="margin-left: 10%"><a href="#div-layout" aria-controls="div-layout" role="tab" data-toggle="tab" style="color: black;">Cadastrar Manualmente</a></li>
+                        <li role="presentation" style="margin-left: 10%"><a href="#div-visualizacao" aria-controls="div-visualizacao" role="tab" data-toggle="tab" style="color: black;">Visualizar Votos Cadastrados</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active cont" id="div-import">
+                            @using (Html.BeginForm("CreateImportArcive", "Votos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <fieldset>
+                                    <div class="editor-label" style="margin-top: 2%">
+                                        <h1 style="text-align: left; color: #333333; font-family: Rockwell">Importar arquivo com votos em lote</h1>
+                                    </div>
+                                    <div class="editor-field" style="margin-top: 2%;">
+                                        <input type="file" name="File" id="myFile" onchange="getLastModifiedDate()" />
+                                        <input type="hidden" name="FileCreationDate" id="hdfFileCreationDate">
+                                    </div>
+
+                                    <p style="margin-top: 2%">
+                                        <input type="submit" class="btn btn-primary" value="Importar" />
+                                    </p>
+
+                                </fieldset>
+                            }
+                        </div>
+                        <div class="tab-pane cont" id="div-instructions">
+                            <h3>
+                                <h1 style="text-align: left; color: #333333; font-family: Rockwell">Instruções layout arquivo</h1>
+                            </h3>
+                            @Html.Partial("_FileInstructions")
+                        </div>
+                        <div class="tab-pane cont" id="div-layout">
+                            <h3>
+                                <h1 style="text-align: left; color: #333333; font-family: Rockwell">Cadastrar Votos</h1>
+                            </h3>
+                            <table class="table" id="TableCandidatosId" style="background-color: white; margin-top: 5%">
+                                <tr>
+
+                                    <th>
+                                        Nome
+                                    </th>
+                                    <th>
+                                        Data de Nascimento
+                                    </th>
+                                    <th>
+                                        Tipo de Candidato
+                                    </th>
+                                    <th>
+                                        Partido
+                                    </th>
+                                    <th>
+                                        Ações
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nome)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DataNascimento)
+                                        </td>
+
+                                        @if (item.TipoCandidato == Enums.Candidato.TipoCandidato.Presidente)
+                                        {
+                                            <td>
+                                                Presidente
+                                            </td>
+                                        }
+                                        else if (item.TipoCandidato == Enums.Candidato.TipoCandidato.Governador)
+                                        {
+                                            <td>
+                                                Governador
+                                            </td>
+                                        }
+                                        else if (item.TipoCandidato == Enums.Candidato.TipoCandidato.Prefeito)
+                                        {
+                                            <td>
+                                                Prefeito
+                                            </td>
+                                        }
+                                        else if (item.TipoCandidato == Enums.Candidato.TipoCandidato.DeputadoEstadual)
+                                        {
+                                            <td>
+                                                Deputado Estadual
+                                            </td>
+                                        }
+                                        else if (item.TipoCandidato == Enums.Candidato.TipoCandidato.DeputadoFederal)
+                                        {
+                                            <td>
+                                                Deputado Federal
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                Vereador
+                                            </td>
+                                        }
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Partido)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Cadastrar", "CreateManual", new { id = item.Id })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                        <div class="tab-pane cont" id="div-visualizacao">
+                            <h3>
+                                <h1 style="text-align: left; color: #333333; font-family: Rockwell">Votos de Candidato Cadastrado</h1>
+                            </h3>
+                            <table class="table" id="TableCandidatosId" style="background-color: white; margin-top: 5%">
+                                <tr>
+
+                                    <th>
+                                        Nome
+                                    </th>
+                                    <th>
+                                        Data de Nascimento
+                                    </th>
+                                    <th>
+                                        Tipo de Candidato
+                                    </th>
+                                    <th>
+                                        Partido
+                                    </th>
+                                    <th>
+                                        Votos Válidos
+                                    </th>
+                                    <th>
+                                        Votos Nulos
+                                    </th>
+                                    <th>
+                                        Votos Brancos
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nome)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DataNascimento)
+                                        </td>
+
+                                        @if (item.TipoCandidato == Enums.Candidato.TipoCandidato.Presidente)
+                                        {
+                                            <td>
+                                                Presidente
+                                            </td>
+                                        }
+                                        else if (item.TipoCandidato == Enums.Candidato.TipoCandidato.Governador)
+                                        {
+                                            <td>
+                                                Governador
+                                            </td>
+                                        }
+                                        else if (item.TipoCandidato == Enums.Candidato.TipoCandidato.Prefeito)
+                                        {
+                                            <td>
+                                                Prefeito
+                                            </td>
+                                        }
+                                        else if (item.TipoCandidato == Enums.Candidato.TipoCandidato.DeputadoEstadual)
+                                        {
+                                            <td>
+                                                Deputado Estadual
+                                            </td>
+                                        }
+                                        else if (item.TipoCandidato == Enums.Candidato.TipoCandidato.DeputadoFederal)
+                                        {
+                                            <td>
+                                                Deputado Federal
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                Vereador
+                                            </td>
+                                        }
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Partido)
+                                        </td>
+                                        <td style="text-align: center;">
+                                            @Html.DisplayFor(modelItem => item.VotosValidos)
+                                        </td>
+                                        <td style="text-align: center;">
+                                            @Html.DisplayFor(modelItem => item.VotosNulos)
+                                        </td>
+                                        <td style="text-align: center;">
+                                            @Html.DisplayFor(modelItem => item.VotosBrancos)
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="Cadastrar"></label>
+                            <div class="col-md-8">
+                                <button id="Cancelar" name="Cancelar" class="btn btn-default" style="width:15%; margin-left: 100%;" type="Reset" onclick="window.location.href = '/Home/Index'">Sair</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</body>
+
+<script src="~/Scripts/bootstrap.min.js"></script>

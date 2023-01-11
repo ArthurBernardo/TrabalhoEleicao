@@ -1,0 +1,114 @@
+﻿@model IEnumerable<TrabalhoEleicao.Entities.Models.Candidato>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<body style="background-color: rgb(46 153 167)">
+    <h1 style="text-align: center; color: #acbad0; font-family:Rockwell"><strong>Tela Inicial Candidato</strong></h1>
+
+
+    <table class="table" id="TableCandidatosId" style="background-color: white; margin-top: 5%">
+        <tr>
+            <th>
+                Identificador
+            </th>
+            <th>
+                Nome
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Data de Nascimento
+            </th>
+            <th>
+                Tipo de Candidato
+            </th>
+            <th>
+                Partido
+            </th>
+            <th>
+                Ações
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataNascimento)
+                </td>
+
+                @if (item.TipoCandidato == Enums.Candidato.TipoCandidato.Presidente)
+                {
+                    <td>
+                        Presidente
+                    </td>
+                }
+                else if (item.TipoCandidato == Enums.Candidato.TipoCandidato.Governador)
+                {
+                    <td>
+                        Governador
+                    </td>
+                }
+                else if (item.TipoCandidato == Enums.Candidato.TipoCandidato.Prefeito)
+                {
+                    <td>
+                        Prefeito
+                    </td>
+                }
+                else if (item.TipoCandidato == Enums.Candidato.TipoCandidato.DeputadoEstadual)
+                {
+                    <td>
+                        Deputado Estadual
+                    </td>
+                }
+                else if (item.TipoCandidato == Enums.Candidato.TipoCandidato.DeputadoFederal)
+                {
+                    <td>
+                        Deputado Federal
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Vereador
+                    </td>
+                }
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Partido)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Deletar", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="col-md-8">
+        <button class="btn btn-success" style="width:30%;" type="Reset" onclick="window.location.href = '/Candidatos/Create'">Criar Novo Candidato</button>
+        <button class="btn btn-danger" style="width:30%;" type="Reset" onclick="window.location.href = '/Home/Index'">Sair</button>
+    </div>
+
+</body>
+
+
+
+
+
+

@@ -1,0 +1,117 @@
+﻿@model TrabalhoEleicao.Entities.Models.Candidato
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <body style="background-color: rgb(46 153 167)">
+        <h1 style="text-align: center; color: #acbad0; font-family:Rockwell"><strong>Cadastrar Voto Manual</strong></h1>
+        <div class="form-horizontal">
+            <div class="panel-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Nome:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Votos Válidos:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.VotosValidos, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.VotosValidos, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Votos Nulos:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.VotosNulos, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.VotosNulos, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Votos Brancos:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.VotosBrancos, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.VotosBrancos, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div hidden>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Email:</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Data de nascimento:</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Tipo de Candidato:</label>
+                        <div class="col-md-10">
+                            @Html.EnumDropDownListFor(model => model.TipoCandidato, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TipoCandidato, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div hidden>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Email:</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Partido, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Partido, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="Cadastrar"></label>
+                    <div class="col-md-8">
+                        <button class="btn btn-danger" style="width:30%;" type="Reset" onclick="window.location.href = '/Votos/Index'">Voltar</button>
+                        <input type="submit" value="Salvar" class="btn btn-success" style="width:30%;" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="Cadastrar"></label>
+                <div class="col-md-8">
+                    <button id="Cancelar" name="Cancelar" class="btn btn-default" style="width:15%; margin-left: 100%;" type="Reset" onclick="window.location.href = '/Home/Index'">Sair</button>
+                </div>
+            </div>
+        </div>
+    </body>
+}
+
+
+<style>
+    .panel-body {
+        background-color: #acbad0;
+        margin: 100px;
+        border: inherit;
+        border-radius: 10px;
+        width: 50%;
+        margin-left: 25%;
+        margin-top: 6%;
+    }
+</style>

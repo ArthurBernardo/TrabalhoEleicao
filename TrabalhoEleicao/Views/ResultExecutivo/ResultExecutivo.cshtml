@@ -1,0 +1,245 @@
+﻿@model List<TrabalhoEleicao.ViewModels.ResultExecutivoViewModel>
+
+<body style="background-color: rgb(205 212 213)">
+    <h1 style="text-align: center; color: #333333; font-family: Rockwell"><strong>Relatório completo da eleição</strong></h1>
+    <button id="Cancelar" name="Cancelar" class="btn btn-default" style="width:15%; margin-left: 100%;" type="Reset" onclick="window.location.href = '/Home/Index'">Sair</button>
+
+    <fieldset>
+        <div class="row" style="margin-top: 1%">
+            <div class="col-sm-12 col-md-12">
+                <div class="tab-container">
+                    <h1 style="text-align: left; color: #333333; font-family: Rockwell">Executivo</h1>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#div-Presidente" aria-controls="div-import" role="tab" data-toggle="tab" style="color: black;">Presidente</a></li>
+                        <li role="presentation" style="margin-left: 10%;"><a href="#div-Governador" aria-controls="div-instructions" role="tab" data-toggle="tab" style="color: black;">Governador</a></li>
+                        <li role="presentation" style="margin-left: 10%"><a href="#div-Prefeito" aria-controls="div-layout" role="tab" data-toggle="tab" style="color: black;">Prefeito</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active cont" id="div-Presidente">
+                            <h3 style="text-align: left; color: #333333; font-family: Rockwell">Resultado Eleição  Presidente</h3>
+                            <table class="table" id="TablePresidenteId" style="background-color: white; margin-top: 2%">
+                                <tr>
+                                    <th>
+                                        Nome
+                                    </th>
+                                    <th>
+                                        Tipo de Candidato
+                                    </th>
+                                    <th>
+                                        Partido
+                                    </th>
+                                    <th>
+                                        Quantidades Votos Recebidos
+                                    </th>
+                                    <th>
+                                        Porcentagem Votação
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    if (item.TipoCandidato == Enums.Candidato.TipoCandidato.Presidente)
+                                    {
+                                        if (item.CandidatoEleito)
+                                        {
+                                            <tr style="background-color: #5cb85c;">
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Nome)
+                                                </td>
+                                                <td>
+                                                    Presidente
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Partido)
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    @Html.DisplayFor(modelItem => item.QtdVotosRecebidos)
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    @Html.DisplayFor(modelItem => item.PorcentagemVotosRecebidos)
+                                                </td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Nome)
+                                                </td>
+                                                <td>
+                                                    Presidente
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Partido)
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    @Html.DisplayFor(modelItem => item.QtdVotosRecebidos)
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    @Html.DisplayFor(modelItem => item.PorcentagemVotosRecebidos)
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+
+                                }
+
+                            </table>
+                        </div>
+                        <div class="tab-pane cont" id="div-Governador">
+                            <h3 style="text-align: left; color: #333333; font-family: Rockwell">Resultado Eleição  Governador</h3>
+                            <table class="table" id="TableCandidatosId" style="background-color: white; margin-top: 3%">
+                                <tr>
+                                    <th>
+                                        Nome
+                                    </th>
+                                    <th>
+                                        Tipo de Candidato
+                                    </th>
+                                    <th>
+                                        Partido
+                                    </th>
+                                    <th>
+                                        Quantidades Votos Recebidos
+                                    </th>
+                                    <th>
+                                        Porcentagem Votação
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    if (item.TipoCandidato == Enums.Candidato.TipoCandidato.Governador)
+                                    {
+                                        if (item.CandidatoEleito)
+                                        {
+                                            <tr style="background-color: #5cb85c;">
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Nome)
+                                                </td>
+                                                <td>
+                                                    Governador
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Partido)
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    @Html.DisplayFor(modelItem => item.QtdVotosRecebidos)
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    @Html.DisplayFor(modelItem => item.PorcentagemVotosRecebidos)
+                                                </td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Nome)
+                                                </td>
+                                                <td>
+                                                    Governador
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Partido)
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    @Html.DisplayFor(modelItem => item.QtdVotosRecebidos)
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    @Html.DisplayFor(modelItem => item.PorcentagemVotosRecebidos)
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+
+                                }
+                            </table>
+                        </div>
+                        <div class="tab-pane cont" id="div-Prefeito">
+                            <h3 style="text-align: left; color: #333333; font-family: Rockwell">Resultado Eleição  Prefeito</h3>
+                            <table class="table" id="TableCandidatosId" style="background-color: white; margin-top: 3%">
+                                <tr>
+                                    <th>
+                                        Nome
+                                    </th>
+                                    <th>
+                                        Tipo de Candidato
+                                    </th>
+                                    <th>
+                                        Partido
+                                    </th>
+                                    <th>
+                                        Quantidades Votos Recebidos
+                                    </th>
+                                    <th>
+                                        Porcentagem Votação
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    if (item.TipoCandidato == Enums.Candidato.TipoCandidato.Prefeito)
+                                    {
+                                        if (item.CandidatoEleito)
+                                        {
+                                            <tr style="background-color: #5cb85c;">
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Nome)
+                                                </td>
+                                                <td>
+                                                    Prefeito
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Partido)
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    @Html.DisplayFor(modelItem => item.QtdVotosRecebidos)
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    @Html.DisplayFor(modelItem => item.PorcentagemVotosRecebidos)
+                                                </td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Nome)
+                                                </td>
+                                                <td>
+                                                    Prefeito
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Partido)
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    @Html.DisplayFor(modelItem => item.QtdVotosRecebidos)
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    @Html.DisplayFor(modelItem => item.PorcentagemVotosRecebidos)
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+
+                                }
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="Cadastrar"></label>
+                            <div class="col-md-8">
+                                <button class="btn btn-danger" style="width: 10%; margin-left: 110%;" type="Reset" onclick="window.location.href = '/Eleicao/Index'">Voltar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</body>
+

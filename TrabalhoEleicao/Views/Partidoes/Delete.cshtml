@@ -1,0 +1,76 @@
+﻿@model TrabalhoEleicao.Entities.Models.Partido
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<body style="background-color: rgb(159 89 99)">
+    <h1 style="text-align: center; color: #acbad0; font-family:Rockwell"><strong>Deletar Partido</strong></h1>
+    <div class="form-horizontal">
+        <div class="panel-body">
+            <div>
+                <h4>Tem certeza de que deseja deletar este partido?</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        <label>Sigla:</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Sigla)
+                    </dd>
+
+                    <dt>
+                        <label>Número:</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Numero)
+                    </dd>
+
+                    <dt>
+                        <label>Nome:</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Nome)
+                    </dd>
+
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="Cadastrar"></label>
+                        <div class="col-md-8">
+                            <button class="btn btn-danger" style="width:30%;" type="Reset" onclick="window.location.href = '/Partidoes/Index'">Voltar</button>
+                            <input type="submit" value="Deletar" class="btn btn-success" style="width:30%;" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Cadastrar"></label>
+            <div class="col-md-8">
+                <button id="Cancelar" name="Cancelar" class="btn btn-default" style="width:15%; margin-left: 100%;" type="Reset" onclick="window.location.href = '/Home/Index'">Sair</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<style>
+    .panel-body {
+        background-color: #acbad0;
+        margin: 100px;
+        border: inherit;
+        border-radius: 10px;
+        width: 50%;
+        margin-left: 25%;
+        margin-top: 6%;
+    }
+</style>
+

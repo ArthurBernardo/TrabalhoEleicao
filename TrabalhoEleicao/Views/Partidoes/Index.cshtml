@@ -1,0 +1,50 @@
+﻿@model IEnumerable<TrabalhoEleicao.Entities.Models.Partido>
+
+@{
+    ViewBag.Title = "Tela Inicial Partido";
+}
+
+
+<body style="background-color: rgb(130 135 31)">
+    <h1 style="text-align: center; color: #acbad0; font-family:Rockwell"><strong>Tela Inicial Partido</strong></h1>
+    <table class="table" style="background-color: white; margin-top: 5%">
+        <tr>
+            <th>
+                Sigla
+            </th>
+            <th>
+                Número
+            </th>
+            <th>
+                Nome
+            </th>
+            <th>
+                Ações
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sigla)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Deletar", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="col-md-8">
+        <button class="btn btn-success" style="width:30%;" type="Reset" onclick="window.location.href = '/Partidoes/Create'">Criar Novo Partido</button>
+        <button class="btn btn-danger" style="width:30%;" type="Reset" onclick="window.location.href = '/Home/Index'">Sair</button>
+    </div>
+</body>
